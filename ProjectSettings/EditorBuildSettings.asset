@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/elemen 16.unity
+    guid: 2be61e61d1af30e41bdd731b5f617d13
+  - enabled: 0
+    path: Assets/elemen 14.unity
+    guid: 1692f081938f1e648830fb1ceb17b426
+  - enabled: 0
+    path: Assets/elemen 22.unity
+    guid: 8834b3d4db2278b4c97c2cb622a7e1dc
+  - enabled: 0
+    path: Assets/elemen 24.unity
+    guid: 3a09ae491f51bdd4dad20c27c15663ee
+  - enabled: 1
+    path: Assets/Scenes/Elemen Alfa/Elemen Alfa.unity
+    guid: d1c60c1fd26419e4b8721a9e64021a7d
+  - enabled: 1
+    path: Assets/Scenes/Elemen Beta/elemen 24.unity
+    guid: ca10f3f8a82cdde4bb2ba09be57acadf
+  - enabled: 1
+    path: Assets/Scenes/Elemen Beta/Elemen Beta.unity
+    guid: 162610b3ae59a784aafef5fde35eb224
+  - enabled: 1
+    path: Assets/Scenes/Elemen Alfa/elemen 24.unity
+    guid: 2d3683ad18c1b4440bf3c791b608a4da
+  - enabled: 1
+    path: Assets/Scenes/Elemen Beta/elemen 14.unity
+    guid: b5959233ff9c11049ad1aecf22b0c627
+  - enabled: 1
+    path: Assets/Scenes/Elemen Alfa/elemen 14.unity
+    guid: db09ba3f165bb6b4ba6b67b6a69932b6
+  m_configObjects: {}

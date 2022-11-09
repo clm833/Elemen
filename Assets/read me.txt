@@ -1,0 +1,15 @@
+Instructivo de Videojuego Elemen
+
+Es un videojuego basado en mundos de elementos, 
+el primer mundo se basa en un sol.
+
+Firex: es el protagonista debe buscar las gemas azules 
+y salir del nivel mediante la piedra verde.
+
+Espada = alt (izquierdo)
+Bolas de Fuego = control (izquierdo)
+Correr = shift
+Salta = barra espaciadora
+
+Demon: son demonios de fuego que se encargan de bajarle la energia a firex.
+
