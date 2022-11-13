@@ -20,7 +20,7 @@ public class DohNDie : MonoBehaviour
     {
         if (other.GetComponent<Vida>() != null)
         {
-            other.GetComponent<Vida>().HoD(amount);
+            other.GetComponent<Vida>().Restar(amount);
             Destroy(gameObject);
         } 
     }

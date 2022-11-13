@@ -22,11 +22,11 @@ public class Hitbox : MonoBehaviour
     }*/
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Vida>()) other.GetComponent<Vida>().burning = true;
+        if (other.GetComponent<Vida>()) other.GetComponent<Vida>().dag = true;
     }
    
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<Vida>()) other.GetComponent<Vida>().burning = false;
+        if (other.GetComponent<Vida>()) other.GetComponent<Vida>().dag = false;
     }
 }

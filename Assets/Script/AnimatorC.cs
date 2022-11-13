@@ -6,50 +6,45 @@ public class AnimatorC : MonoBehaviour
 {
     private Animator anim;
     private CharacterController cc;
+    public new Transform camera;
     public float Velocidad;
+    private float Turbo;
+    private bool ac;
     private float Animacion;
     public float Mvertical;
     public float Fsalto;
     public float Gravedad;
-    public int Jump;
-    private bool correr;
-    private float turbo;
+    public int Jump; 
     public bool caer;
-    public GameObject Bala;
-
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         cc = GetComponent<CharacterController>();
         caer = false;
-        correr = true;
-        turbo = Velocidad;
+        ac = true;
+        Turbo = Velocidad;
     }
 
     // Update is called once per frame
     void Update()
     {
-        anim.SetFloat("Animacion", Animacion);
-        anim.SetFloat("Mvertical", Mvertical);
-        Mvertical -= Gravedad * Time.deltaTime;
+        float hor = Input.GetAxis("Horizontal");
+        float ver = Input.GetAxis("Vertical");
+        Vector3 m = Vector3.zero;
+        float ms = 0;
+        Mvertical += Gravedad * Time.deltaTime;
         if (cc.isGrounded)
         {
             Mvertical = 0;
             Jump = 0;
         }
-        if (Mvertical < 0 & caer == false)
-        {
-            gameObject.layer = 0;
-        }
-        if (Mvertical < -0.6 & Jump < 1)
-        {
-            Jump++;
-        }
-        if (Mvertical < -5)
-        {
-            caer = false;
-        }
+        if (Mvertical < 0 & caer == false) {gameObject.layer = 2;}
+
+        if (Mvertical < -0.6 & Jump < 1) {Jump++;}
+
+        if (Mvertical < -5) {caer = false;}
+
         if (Input.GetKey(KeyCode.Z) & Input.GetKeyDown(KeyCode.Space))
         {
             caer = true;
@@ -57,61 +52,66 @@ public class AnimatorC : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space) & Jump < 2 & caer == false)
         {
-            //anim.SetTrigger("Jump");
             Jump++;
             Mvertical = Fsalto;
             gameObject.layer = 7;
         }
-        if (Input.GetAxis("Horizontal")!=0 |Input.GetAxis("Vertical")!=0)
+
+        if (hor!=0 |ver!=0)
         {
+            if (Input.GetKey(KeyCode.LeftShift)& ac==true)
+            {
+                ac = false;
+                Velocidad = Velocidad+ 10;
+            }
+            if (!Input.GetKey(KeyCode.LeftShift) & ac == false)
+            {
+                ac = true;
+                Velocidad = Turbo;
+            }
+
+            Vector3 forward = camera.forward;
+            forward.y = 0;
+            forward.Normalize();
+
+            Vector3 right = camera.right;
+            right.y = 0;
+            right.Normalize();
+
+            Vector3 direccion = forward * ver + right * hor;
+            ms = Mathf.Clamp01(direccion.magnitude);
+            direccion.Normalize();
+
+            m = direccion * Velocidad * ms;
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direccion), 0.2f);
             
-            //anim.SetTrigger("walk");
-
-            if (Input.GetKey(KeyCode.LeftShift) & correr==true)
-            {
-                correr = false;
-                Velocidad = Velocidad + 5;
-                Debug.Log("correr");
-                //anim.SetTrigger("Run");
-            }
-            if (!Input.GetKey(KeyCode.LeftShift) & correr == false)
-            {
-                correr = true;
-                Velocidad = turbo;
-                Debug.Log("correr");
-                //anim.SetTrigger("Run");
-            }
-
             Animacion = Velocidad;
         }
-        if (Input.GetAxis("Horizontal") == 0 & Input.GetAxis("Vertical") == 0 & Animacion == Velocidad)
+        if (hor == 0 & ver == 0 & Animacion == Velocidad)
         {
             Animacion=0;
-         //   anim.SetTrigger("Run");
+            
         }
-        if(Input.GetAxis("Fire2")!=0)
+        if(Input.GetKeyDown(KeyCode.C))
         {
-            Debug.Log("Achazo");
             anim.SetTrigger("golpe");
         }
 
-        if (Input.GetAxis("Fire1")!=0)
+        if (Input.GetKeyDown(KeyCode.V))
         {
-            Debug.Log("protege");
             anim.SetTrigger("proteger");
-            Invoke("Disparar", 1);
         }
 
-        Vector3 H = Input.GetAxis("Horizontal") * Velocidad * transform.right;
-        H.y = Mvertical;
-        Vector3 V = Input.GetAxis("Vertical") * Velocidad * transform.forward;
-        V = V + H;
-        cc.Move(V * Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            anim.SetTrigger("fallecido");
+        }
+        m.y = Mvertical;
+        //Debug.Log(Animacion);
+        cc.Move(m*Time.deltaTime);
+        anim.SetFloat("VP", Animacion);
+        anim.SetFloat("Mvertical", Mvertical);
 
-    }
-
-    private void Disparar()
-    {
-        Instantiate(Bala, transform.position, transform.rotation);
     }
 }

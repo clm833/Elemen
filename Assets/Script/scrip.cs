@@ -24,5 +24,7 @@ public class scrip : MonoBehaviour
     public void parar()
     {
         agent.speed = 0;
+        agent.acceleration = 0;
+        agent.angularSpeed = 0;
     }
 }
